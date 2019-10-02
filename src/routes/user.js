@@ -2,7 +2,7 @@ import { Router } from "express";
 
 import {
   userRegister,
-  userComfirmEmail,
+  // userComfirmEmail,
   userLogin,
   getUserInfo,
   modifyUserInfo,
@@ -12,12 +12,12 @@ const router = Router();
 
 router.post("/register", userRegister);
 
-router.get("/confirm", userComfirmEmail);
+// router.get("/confirm", userComfirmEmail);
 
 router.post("/login", userLogin);
 
 router.get("/info", getUserInfo);
 
-router.patch("/info", modifyUserInfo);
+router.put("/info", modifyUserInfo);
 
 export const user = router;

@@ -1,7 +1,7 @@
 import { errorRes, verifyJWT } from "../utils";
 import { errorType } from "../configs/errorType";
 
-export const checker = (req, res, next) => {
+export const jwtChecker = (req, res, next) => {
   if (req.method === "OPTIONS") {
     return next();
   }
@@ -12,7 +12,7 @@ export const checker = (req, res, next) => {
     );
   }
   try {
-    verifyJWT(jwt);
+    res.locals.id = verifyJWT(jwt);
     next();
   } catch (e) {
     return next(
