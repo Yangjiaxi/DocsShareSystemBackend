@@ -1,5 +1,5 @@
-import { logger } from './utils/logger';
+import { logger } from "./utils/logger";
 
 export const tasks = async () => {
-  logger.info('[TASK] Task loaded.');
+  logger.info("[TASK] Task loaded.");
 };

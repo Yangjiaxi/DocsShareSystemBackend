@@ -1,15 +1,15 @@
-import express from 'express';
+import express from "express";
 // import https from 'https';
 // import fs from 'fs';
 
-import { jsonParser, urlencodedParser } from './middlewares/bodyParser';
-import { cors } from './middlewares/cors';
-import { infoLogger } from './middlewares/infoLogger';
-import { noMatch } from './middlewares/noMatch';
-import { errorHandler } from './middlewares/errorHandler';
-import { routes } from './routes';
-import { logger } from './utils/logger';
-import { tasks } from './tasks';
+import { jsonParser, urlencodedParser } from "./middlewares/bodyParser";
+import { cors } from "./middlewares/cors";
+import { infoLogger } from "./middlewares/infoLogger";
+import { noMatch } from "./middlewares/noMatch";
+import { errorHandler } from "./middlewares/errorHandler";
+import { routes } from "./routes";
+import { logger } from "./utils/logger";
+import { tasks } from "./tasks";
 
 const PORT = 5000;
 const app = express();
