@@ -1,3 +1,5 @@
+import { UserRepo } from "../../database";
+
 export const userRegister = async (req, res, next) => {
   try {
     res.json({ type: "success" });
