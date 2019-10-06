@@ -39,5 +39,6 @@ module.exports = {
     'no-extend-native': 0,
     'func-names': 0,
     'no-param-reassign': 0,
+    "no-underscore-dangle": 0,
   }
 };

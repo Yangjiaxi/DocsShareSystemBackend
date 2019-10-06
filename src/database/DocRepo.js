@@ -5,10 +5,6 @@ import { commentSchema } from "./CommentRepo";
 
 // 文档信息 使用文档id进行管理
 export const docSchema = createSchema({
-  // pid: {
-  //   type: Number,
-  //   required: true,
-  // },
   title: {
     type: String,
     required: true,
@@ -16,6 +12,18 @@ export const docSchema = createSchema({
   time: {
     type: Number,
     required: true,
+  },
+  recycled: {
+    type: Boolean,
+    default: false,
+  },
+  destroyed: {
+    type: Boolean,
+    default: false,
+  },
+  content: {
+    type: [String],
+    default: [],
   },
   comments: {
     type: [commentSchema],

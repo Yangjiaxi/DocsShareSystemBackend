@@ -7,16 +7,12 @@ export const jwtChecker = (req, res, next) => {
   }
   const jwt = req.get("Authorization");
   if (!jwt) {
-    return next(
-      errorRes("No JWT provided!", "error", { err: errorType.NO_JWT }),
-    );
+    return next(errorRes(errorType.NO_JWT, "error"));
   }
   try {
     res.locals.id = verifyJWT(jwt);
     next();
   } catch (e) {
-    return next(
-      errorRes("Invalid JWT!", "error", { err: errorType.INVALID_JWT }),
-    );
+    return next(errorRes(errorType.INVALID_JWT, "error"));
   }
 };

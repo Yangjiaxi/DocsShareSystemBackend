@@ -1,3 +1,3 @@
-export { userRegister /* , userComfirmEmail */ } from "./register";
-export { userLogin } from "./login";
-export { getUserInfo, modifyUserInfo } from "./info";
+export { userRegister, userRegisterVerify } from "./register";
+export { userLogin, handleLoginVerify } from "./login";
+export { getUserInfo, modifyUserInfo, modifyUserInfoVerify } from "./info";

@@ -2,9 +2,9 @@ import jwt from "jsonwebtoken";
 import { secret } from "../configs/const";
 
 export const errorRes = (message, type, data) => ({
-  message, // for console
+  message: message || null, // for error i18nKey -> [dict] -> text
   type, // "success" || "warning" || "error"
-  data: data || null, // i18n key -> [i18mDict] -> readable text which i18n-ed
+  data: data || null, // if success, it contains useful data
 });
 
 export const generateJWT = (payload, expire) => {

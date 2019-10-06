@@ -12,13 +12,12 @@ export const userSchema = createSchema({
     type: String,
     required: true,
   },
-  // after Salt
   password: {
-    type: String,
-    required: true,
+    hash: String,
+    salt: String,
   },
   // 注册时间
-  regTime: {
+  time: {
     type: Number,
     required: true,
   },
