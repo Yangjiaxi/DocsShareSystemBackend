@@ -1,6 +1,5 @@
-import { model } from "mongoose";
+import { model, Schema } from "mongoose";
 import { createSchema, RepositoryBase } from "./Base";
-import { docSchema } from "./DocRepo";
 
 // 用户信息
 export const userSchema = createSchema({
@@ -23,12 +22,47 @@ export const userSchema = createSchema({
   },
   // 用户创建的文档
   ownedDocs: {
-    type: [docSchema],
+    type: [
+      {
+        id: {
+          type: Schema.Types.ObjectId,
+          required: true,
+        },
+        lastUse: {
+          type: Number,
+        },
+      },
+    ],
     default: [],
   },
   // 与用户分享的文档
   sharedDocs: {
-    type: [docSchema],
+    type: [
+      {
+        id: {
+          type: Schema.Types.ObjectId,
+          required: true,
+        },
+        lastUse: {
+          type: Number,
+        },
+      },
+    ],
+    default: [],
+  },
+  // 移动到回收站的文档
+  trashDocs: {
+    type: [
+      {
+        id: {
+          type: Schema.Types.ObjectId,
+          required: true,
+        },
+        time: {
+          type: Number,
+        },
+      },
+    ],
     default: [],
   },
 });

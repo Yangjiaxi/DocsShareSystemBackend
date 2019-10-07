@@ -7,19 +7,19 @@ let logInfo;
 let logError;
 
 if (process.env.NODE_ENV === "development") {
-  logInfo = { write: console.log };
-  logError = { write: console.error };
+  logInfo = console.log;
+  logError = console.error;
 } else {
-  logInfo = fs.createWriteStream("./logs/stdout.log");
-  logError = fs.createWriteStream("./logs/stderr.log");
+  logInfo = msg => fs.appendFile("./logs/stdout.log", `${msg}\n`, () => {});
+  logError = msg => fs.appendFile("./logs/stderr.log", `${msg}\n`, () => {});
 }
 
 export const logger = {
   info: message => {
-    logInfo.write(`${getTimeString()} | [INFO] ${message}\n`);
+    logInfo(`${getTimeString()} | [I] ${message}`);
   },
   error: message => {
-    logError.write(`${getTimeString()} | [ERROR] ${message}\n`);
+    logError(`${getTimeString()} | [E] ${message}`);
   },
 };
 

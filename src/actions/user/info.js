@@ -7,12 +7,12 @@ import { errorType } from "../../configs/errorType";
 
 export const getUserInfo = async (req, res, next) => {
   try {
-    const data = await UserRepo.queryById(res.locals.id);
-    if (!data) {
+    const user = await UserRepo.queryById(res.locals.id);
+    if (!user) {
       return next(errorRes(errorType.NO_SUCH_USER, "error"));
     }
-    data.password = undefined;
-    res.json({ data, type: "success" });
+    const { _id, username, email, time } = user;
+    res.json({ data: { _id, username, email, time }, type: "success" });
   } catch (error) {
     return next(error);
   }

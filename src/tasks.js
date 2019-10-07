@@ -3,5 +3,5 @@ import { initStatRepo } from "./database";
 
 export const tasks = async () => {
   await initStatRepo();
-  logger.info("[TASK] Task loaded.");
+  logger.info("[T] Task loaded.");
 };

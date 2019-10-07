@@ -1,9 +1,7 @@
-import { model } from "mongoose";
+import { model, Schema } from "mongoose";
 import { createSchema, RepositoryBase } from "./Base";
 
-import { commentSchema } from "./CommentRepo";
-
-// 文档信息 使用文档id进行管理
+// 文档信息 使用文档_id进行管理
 export const docSchema = createSchema({
   title: {
     type: String,
@@ -13,20 +11,26 @@ export const docSchema = createSchema({
     type: Number,
     required: true,
   },
-  recycled: {
+  // 放入回收站 (创建者行为)
+  deleted: {
     type: Boolean,
     default: false,
   },
+  // 销毁
   destroyed: {
     type: Boolean,
     default: false,
+  },
+  shares: {
+    type: Number,
+    default: 0,
   },
   content: {
     type: [String],
     default: [],
   },
   comments: {
-    type: [commentSchema],
+    type: [Schema.Types.ObjectId],
     default: [],
   },
 });

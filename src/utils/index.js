@@ -4,7 +4,7 @@ import { secret } from "../configs/const";
 export const errorRes = (message, type, data) => ({
   message: message || null, // for error i18nKey -> [dict] -> text
   type, // "success" || "warning" || "error"
-  data: data || null, // if success, it contains useful data
+  data: data || null, // broadcast
 });
 
 export const generateJWT = (payload, expire) => {

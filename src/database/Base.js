@@ -33,6 +33,18 @@ export class RepositoryBase {
     return this.model.findByIdAndUpdate(id, upgrade, { new: true });
   }
 
+  pushById(id, newItem) {
+    return this.model.findByIdAndUpdate(id, { $push: newItem }, { new: true });
+  }
+
+  pullById(id, deleteItem) {
+    return this.model.findByIdAndUpdate(
+      id,
+      { $pull: deleteItem },
+      { new: true },
+    );
+  }
+
   delete(condition) {
     return this.model.findOneAndDelete(condition);
   }
