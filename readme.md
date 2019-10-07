@@ -6,7 +6,7 @@
 
 成功
 
-```json
+```js
 {
     type: "success",
     data: Object || null,
@@ -15,7 +15,7 @@
 
 失败
 
-```json
+```js
 {
     type: "error" || "warning",
     message: String,
