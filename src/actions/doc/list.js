@@ -24,7 +24,6 @@ export const getRecent = async (req, res, next) => {
       if (!trashArray.includes(innerID.toString())) {
         // console.log(innerID);
         const doc = await DocRepo.queryById(innerID);
-        console.log(doc);
         if (doc) {
           const { title, time } = doc;
           data.push({
