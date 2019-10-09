@@ -55,7 +55,7 @@
   - `data: [{id, createTime, lastUse, owned(Bool), title, deleted(Bool)}]`
 - (`[GET]`) `/shared`
   - 获取与我共享的文档
-  - `data: [{id, createTime, lastUse, owned(Bool), title, deleted/(Bool)}]`
+  - `data: [{id, createTime, lastUse, owned(Bool), title, deleted(Bool)}]`
 - (`[GET]`) `/trash`
   - 获取我删除的文档(可恢复)
   - `data: [{id, deleteTime, owned(Bool), title}]`

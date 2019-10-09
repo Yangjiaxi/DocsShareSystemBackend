@@ -29,25 +29,31 @@ export const modifyUserInfo = async (req, res, next) => {
     const { id } = res.locals;
     const user = await UserRepo.queryById(id);
     if (!user) {
-      return next(errorRes("User doesn't exist!", "warning"));
+      return next(errorRes(errorType.NO_SUCH_USER, "warning"));
     }
-    const { username, email, password } = req.body;
 
-    if (password && typeof password === "string") {
-      const salt = crypto.randomBytes(16).toString("base64");
-      const hash = crypto.scryptSync(password, salt, 64).toString();
+    const { /* username, email, */ newPassword, oldPassword } = req.body;
+
+    const { hash, salt } = user.password;
+    if (hash !== crypto.scryptSync(oldPassword, salt, 64).toString()) {
+      return next(errorRes(errorType.BAD_LOGIN, "error"));
+    }
+
+    if (newPassword && typeof newPassword === "string") {
+      const newSalt = crypto.randomBytes(16).toString("base64");
+      const newHash = crypto.scryptSync(newPassword, salt, 64).toString();
       await UserRepo.updateById(id, {
         password: {
-          salt,
-          hash,
+          salt: newSalt,
+          hash: newHash,
         },
       });
     }
 
-    await UserRepo.updateById(id, {
-      username,
-      email,
-    });
+    // await UserRepo.updateById(id, {
+    //   username,
+    //   email,
+    // });
 
     res.json({ type: "success" });
   } catch (error) {
@@ -56,13 +62,17 @@ export const modifyUserInfo = async (req, res, next) => {
 };
 
 export const modifyUserInfoVerify = [
-  body("username")
+  // body("username")
+  //   .isString()
+  //   .isLength({ min: 6 })
+  //   .withMessage(errorType.BAD_USERNAME),
+  // body("email")
+  //   .isEmail()
+  //   .withMessage(errorType.BAD_EMAIL),
+  body("oldPassword")
     .isString()
     .isLength({ min: 6 })
-    .withMessage(errorType.BAD_USERNAME),
-  body("email")
-    .isEmail()
-    .withMessage(errorType.BAD_EMAIL),
+    .withMessage(errorType.BAD_OLD_PASSWORD),
   body("password")
     .isString()
     .isLength({ min: 6 })

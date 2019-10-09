@@ -15,6 +15,7 @@ export const errorType = {
   BAD_LOGIN: "BAD_LOGIN",
   // (info)
   NO_SUCH_USER: "NO_SUCH_USER",
+  BAD_OLD_PASSWORD: "BAD_OLD_PASSWORD",
   // (share)
   NO_SUCH_DOC: "NO_SUCH_DOC",
   // (delete)
