@@ -53,6 +53,9 @@
 - (`[GET]`) `/recent`
   - 获取最近使用的文档
   - `data: [{id, createTime, lastUse, owned(Bool), title, deleted(Bool)}]`
+- (`[GET]`) `/my`
+  - 获取最近使用的文档
+  - `data: [{id, createTime, lastUse, owned(Bool)=true, title, deleted(Bool)=false}]`
 - (`[GET]`) `/shared`
   - 获取与我共享的文档
   - `data: [{id, createTime, lastUse, owned(Bool), title, deleted(Bool)}]`
@@ -65,3 +68,10 @@
   - 恢复`docID`的文档
 - (`[DELETE]`) `/destroy/:docID`
   - 彻底删除`docID`的文档
+
+- (`[GET]`) `/accept/:docID`
+  - 打开某连接时触发，可能造成
+    - 没有该文档或已被创建者删除 -> 报错
+    - 与自己共享但被放入回收站 -> 从回收站取出
+    - 与自己共享或为自己所有 -> Nothing
+    - 没见过该文档 -> 被共享

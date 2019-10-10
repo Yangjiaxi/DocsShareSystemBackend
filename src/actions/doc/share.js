@@ -2,6 +2,14 @@ import { UserRepo, DocRepo } from "../../database";
 import { errorRes } from "../../utils";
 import { errorType } from "../../configs/errorType";
 
+/*
+用户id接受分享 -> docID
+1. docID 不存在 -> err
+2. 从id的trash中剔除docID (接受分享->从垃圾箱中回收)
+3. id是docID的所有者 或 id被共享docID -> 正常返回
+4. shared数组压入docID -> 返回
+*/
+
 export const acceptShare = async (req, res, next) => {
   try {
     const { id } = res.locals;
@@ -34,14 +42,15 @@ export const acceptShare = async (req, res, next) => {
       ({ id: innerID }) => innerID.toString() === docID,
     );
 
-    // 不拥有也不被共享，说明被共享
+    // 不拥有也不被共享，说明可以被共享
     if (!isOwned && !isShared) {
       await UserRepo.pushById(id, {
         sharedDocs: { id: docID, lastUse: new Date() },
       });
+      res.json({ data: true, type: "success" });
+    } else {
+      res.json({ data: false, type: "success" });
     }
-
-    res.json({ type: "success" });
   } catch (error) {
     return next(error);
   }

@@ -60,6 +60,42 @@ export const getRecent = async (req, res, next) => {
   }
 };
 
+export const getMine = async (req, res, next) => {
+  try {
+    const { id } = res.locals;
+    const user = await UserRepo.queryById(id);
+    if (!user) {
+      return next(errorRes(errorType.NO_SUCH_USER, "error"));
+    }
+    const { ownedDocs, trashDocs } = user;
+    const trashArray = [];
+    trashDocs.forEach(({ id: innerID }) => trashArray.push(innerID.toString()));
+    // console.log(trashArray);
+    const data = [];
+
+    await forEachAsync(ownedDocs, async ({ id: innerID, lastUse }) => {
+      if (!trashArray.includes(innerID.toString())) {
+        // console.log(innerID);
+        const doc = await DocRepo.queryById(innerID);
+        if (doc) {
+          const { title, time } = doc;
+          data.push({
+            id: innerID,
+            createTime: time,
+            lastUse,
+            owned: true,
+            title,
+            deleted: false,
+          });
+        }
+      }
+    });
+    res.json({ data, type: "success" });
+  } catch (error) {
+    return next(error);
+  }
+};
+
 // 与用户共享的，不包括删除的
 export const getShared = async (req, res, next) => {
   try {

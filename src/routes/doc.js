@@ -6,6 +6,7 @@ import {
   restoreFromTrash,
   deleteForever,
   getRecent,
+  getMine,
   getShared,
   getTrash,
   acceptShare,
@@ -20,6 +21,8 @@ router.use(jwtChecker);
 router.get("/new", createNewDoc);
 
 router.get("/recent", getRecent);
+
+router.get("/my", getMine);
 
 router.get("/shared", getShared);
 
