@@ -21,15 +21,12 @@ export const docSchema = createSchema({
     type: Boolean,
     default: false,
   },
-  shares: {
-    type: Number,
-    default: 0,
-  },
   content: {
     type: [String],
     default: [],
   },
   comments: {
+    // -> [floorSchema]
     type: [Schema.Types.ObjectId],
     default: [],
   },

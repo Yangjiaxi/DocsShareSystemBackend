@@ -14,6 +14,7 @@ connect(
   .catch(err => logger.error(err.message));
 
 export { DocRepo } from "./DocRepo";
+export { FloorRepo } from "./FloorRepo";
 export { CommentRepo } from "./CommentRepo";
 export { UserRepo } from "./UserRepo";
 export { CounterRepo } from "./CounterRepo";
