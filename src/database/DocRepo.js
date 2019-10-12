@@ -22,10 +22,6 @@ export const docSchema = createSchema({
     default: false,
   },
   content: {
-    type: [String],
-    default: [],
-  },
-  comments: {
     // -> [floorSchema]
     type: [Schema.Types.ObjectId],
     default: [],
