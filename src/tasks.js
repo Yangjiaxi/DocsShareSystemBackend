@@ -4,16 +4,22 @@ import { ObjectId } from "mongodb";
 
 const id = "5d9e054895ba0128a7bfe131";
 const add = async () => {
-  const comment2 = await CommentRepo.createAndInsert({
-    content: "Comment - 2",
+  const comment21 = await CommentRepo.createAndInsert({
+    content: "Comment - 21",
     time: new Date(),
-    username: "name - 2",
+    username: "name - 21",
+    voteUp: "123",
+  });
+  const comment22 = await CommentRepo.createAndInsert({
+    content: "Comment - 22",
+    time: new Date(),
+    username: "name - 22",
     voteUp: "123",
   });
   const floor2 = await FloorRepo.createAndInsert({
     content: "Content - 2",
     time: new Date(),
-    comments: [comment2],
+    comments: [comment21, comment22],
   });
 
   const floorID = ObjectId(floor2._id);

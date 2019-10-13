@@ -1,8 +1,6 @@
 import { DocRepo, UserRepo, FloorRepo } from "../../database";
 import { errorRes } from "../../utils";
 import { errorType } from "../../configs/errorType";
-import { forEachAsync } from "../../utils/forEachAsync";
-import { ObjectId } from "mongodb";
 
 export const checkoutDocInfo = async (req, res, next) => {
   try {
@@ -29,7 +27,19 @@ export const checkoutDocInfo = async (req, res, next) => {
       content.map(async innerID => FloorRepo.queryById(innerID)),
     );
 
-    res.json({ contents: contentQuery, title, time, id: _id, type: "success" });
+    const { ownedDocs } = user;
+    const isOwned = ownedDocs.some(
+      ({ id: innerID }) => innerID.toString() === docID,
+    );
+
+    res.json({
+      contents: contentQuery,
+      isOwned,
+      title,
+      time,
+      id: _id,
+      type: "success",
+    });
   } catch (error) {
     return next(error);
   }
