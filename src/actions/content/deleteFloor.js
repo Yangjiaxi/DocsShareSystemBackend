@@ -11,22 +11,22 @@ export const onDeleteFloor = socket => async req => {
     const user = await UserRepo.queryById(id);
     if (!user) {
       return socket.emit(
-        "changeFloorError",
+        "deleteFloorError",
         errorRes(errorType.NO_SUCH_USER, "error"),
       );
     }
     const doc = await DocRepo.queryById(docID);
     if (!doc) {
       return socket.emit(
-        "changeFloorError",
+        "deleteFloorError",
         errorRes(errorType.NO_SUCH_DOC, "error"),
       );
     }
-
     await FloorRepo.deleteById(floorID);
+    await DocRepo.pullById(docID, { content: floorID });
     return io.sockets.in(docID).emit("deleteFloor", { id: floorID });
   } catch ({ message }) {
     logger.error(message);
-    return socket.emit("changeFloorError", errorRes(message, "error"));
+    return socket.emit("deleteFloorError", errorRes(message, "error"));
   }
 };

@@ -6,3 +6,4 @@ export { onChangeTitle } from "./changeTitle";
 export { onAppendFloor } from "./appendFloor";
 export { onChangeFloor } from "./changeFloor";
 export { onDeleteFloor } from "./deleteFloor";
+export { onAddComment } from "./addComment";

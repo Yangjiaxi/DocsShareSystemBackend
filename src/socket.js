@@ -6,6 +6,7 @@ import {
   onAppendFloor,
   onChangeFloor,
   onDeleteFloor,
+  onAddComment,
 } from "./actions/content";
 
 export const socketServer = server => socketIO(server);
@@ -19,5 +20,6 @@ export const socketHandler = rootServer => {
     socket.on("appendFloor", onAppendFloor(socket));
     socket.on("changeFloor", onChangeFloor(socket));
     socket.on("deleteFloor", onDeleteFloor(socket));
+    socket.on("addComment", onAddComment(socket));
   });
 };
