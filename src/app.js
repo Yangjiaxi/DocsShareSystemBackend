@@ -1,14 +1,16 @@
 import express from "express";
+import http from "http";
 // import https from 'https';
-// import fs from 'fs';
 
 import { jsonParser, urlencodedParser } from "./middlewares/bodyParser";
 import { cors } from "./middlewares/cors";
 import { infoLogger } from "./middlewares/infoLogger";
 import { noMatch } from "./middlewares/noMatch";
 import { errorHandler } from "./middlewares/errorHandler";
+
 import { routes } from "./routes";
 import { logger } from "./utils/logger";
+import { socketHandler, socketServer } from "./socket";
 import { tasks } from "./tasks";
 
 const PORT = 5000;
@@ -33,8 +35,12 @@ app.use(errorHandler);
 //   cert: fs.readFileSync('keys/api.pem'),
 // }, app);
 
-// server.listen(PORT, tasks);
+const server = http.createServer(app);
 
-app.listen(PORT, tasks);
+export const io = socketServer(server);
+
+socketHandler(io);
+
+server.listen(PORT, tasks);
 
 logger.info(`Server started, listening at port ${PORT}`);

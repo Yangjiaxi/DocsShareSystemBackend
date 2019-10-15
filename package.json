@@ -24,7 +24,8 @@
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.2.7",
     "mongoose": "^5.6.4",
-    "pm2": "^3.5.1"
+    "pm2": "^3.5.1",
+    "socket.io": "^2.3.0"
   },
   "scripts": {
     "dev": "nodemon index.js",

@@ -20,4 +20,6 @@ export const errorType = {
   NO_SUCH_DOC: "NO_SUCH_DOC",
   // (delete)
   ALREADY_DELETED: "ALREADY_DELETED",
+  // (changeTitle)
+  TITLE_ZERO_LENGTH: "TITLE_ZERO_LENGTH",
 };

@@ -13,7 +13,7 @@ Socket 相关操作
 3. 点踩评论
 */
 
-export const onModifyDoc = async (req, res, next) => {
+export const onModifyDoc = socket => async (req, res, next) => {
   try {
     res.json({ type: "success" });
   } catch (error) {
