@@ -23,7 +23,6 @@ export const onAppendFloor = socket => async req => {
         errorRes(errorType.NO_SUCH_DOC, "error"),
       );
     }
-    console.log("new floor");
     const info = {
       content: "new floor",
       time: new Date(),

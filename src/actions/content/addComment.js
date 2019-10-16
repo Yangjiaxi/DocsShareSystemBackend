@@ -8,7 +8,6 @@ import { io } from "../../app";
 export const onAddComment = socket => async req => {
   try {
     const { id: docID, token, floorID, content } = req;
-    console.log(floorID, content);
     const id = verifyJWT(token);
     const user = await UserRepo.queryById(id);
     if (!user) {

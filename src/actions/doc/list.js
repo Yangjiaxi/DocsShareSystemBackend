@@ -17,12 +17,10 @@ export const getRecent = async (req, res, next) => {
     const { ownedDocs, sharedDocs, trashDocs } = user;
     const trashArray = [];
     trashDocs.forEach(({ id: innerID }) => trashArray.push(innerID.toString()));
-    // console.log(trashArray);
     const data = [];
 
     await forEachAsync(ownedDocs, async ({ id: innerID, lastUse }) => {
       if (!trashArray.includes(innerID.toString())) {
-        // console.log(innerID);
         const doc = await DocRepo.queryById(innerID);
         if (doc) {
           const { title, time } = doc;
@@ -70,12 +68,10 @@ export const getMine = async (req, res, next) => {
     const { ownedDocs, trashDocs } = user;
     const trashArray = [];
     trashDocs.forEach(({ id: innerID }) => trashArray.push(innerID.toString()));
-    // console.log(trashArray);
     const data = [];
 
     await forEachAsync(ownedDocs, async ({ id: innerID, lastUse }) => {
       if (!trashArray.includes(innerID.toString())) {
-        // console.log(innerID);
         const doc = await DocRepo.queryById(innerID);
         if (doc) {
           const { title, time } = doc;

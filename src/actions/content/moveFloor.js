@@ -1,5 +1,5 @@
 import { verifyJWT, errorRes } from "../../utils";
-import { UserRepo, DocRepo, FloorRepo } from "../../database";
+import { UserRepo, DocRepo } from "../../database";
 import { errorType } from "../../configs/errorType";
 import { logger } from "../../utils/logger";
 import { io } from "../../app";
@@ -7,8 +7,6 @@ import { io } from "../../app";
 export const onMoveFloor = socket => async req => {
   try {
     const { id: docID, token, from, to } = req;
-    // dir : "UP", "DOWN"
-    // console.log(docID, from, to);
     const id = verifyJWT(token);
     const user = await UserRepo.queryById(id);
     if (!user) {

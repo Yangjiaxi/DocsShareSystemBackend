@@ -7,7 +7,6 @@ import { io } from "../../app";
 export const onVoteComment = socket => async req => {
   try {
     const { id: docID, token, floorID, commentID, vote } = req;
-    console.log(floorID, vote);
     const id = verifyJWT(token);
     const user = await UserRepo.queryById(id);
     if (!user) {
