@@ -14,7 +14,7 @@ import { logger } from "./utils/logger";
 import { socketHandler, socketServer } from "./socket";
 import { tasks } from "./tasks";
 
-const PORT = 5000;
+const PORT = 5050;
 const app = express();
 
 app.use(jsonParser);
