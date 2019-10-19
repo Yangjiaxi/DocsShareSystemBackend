@@ -31,11 +31,12 @@ export const socketHandler = rootServer => {
     socket.on("addComment", onAddComment(socket));
     socket.on("voteComment", onVoteComment(socket));
 
+    updateTime(token, id);
     const timer = setInterval(() => {
       if (!updateTime(token, id)) {
         clearInterval(timer);
       }
-    }, 5000);
+    }, 20 * 1000);
 
     socket.on("disconnect", () => {
       if (timer) clearInterval(timer);
