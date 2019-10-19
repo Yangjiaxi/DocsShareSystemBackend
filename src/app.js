@@ -1,6 +1,7 @@
 import express from "express";
-import http from "http";
-// import https from 'https';
+// import http from "http";
+import https from "https";
+import fs from "fs";
 
 import { jsonParser, urlencodedParser } from "./middlewares/bodyParser";
 import { cors } from "./middlewares/cors";
@@ -30,12 +31,15 @@ app.use(noMatch);
 
 app.use(errorHandler);
 
-// const server = https.createServer({
-//   key: fs.readFileSync('keys/api.key'),
-//   cert: fs.readFileSync('keys/api.pem'),
-// }, app);
+const server = https.createServer(
+  {
+    key: fs.readFileSync("keys/api-doc.key"),
+    cert: fs.readFileSync("keys/api-doc.pem"),
+  },
+  app,
+);
 
-const server = http.createServer(app);
+// const server = http.createServer(app);
 
 export const io = socketServer(server);
 
